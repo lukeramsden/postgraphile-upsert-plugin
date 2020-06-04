@@ -1,5 +1,5 @@
 {
-  "name": "@fullstackio/postgraphile-upsert-plugin",
+  "name": "@lukeramsden/postgraphile-upsert-plugin",
   "description": "add postgres upsert mutations to postgraphile",
   "version": "1.4.0",
   "main": "build/postgraphile-upsert.js",
@@ -10,36 +10,40 @@
   "engines": {
     "node": ">=8"
   },
-  "maintainer": "nmurray <nate@fullstack.io>",
+  "maintainer": "Luke Ramsden <lukeramsden@protonmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "@types/bluebird": "^3.5.24",
-    "@types/dockerode": "^2.5.9",
-    "@types/execa": "^0.9.0",
-    "@types/nanographql": "^2.0.1",
-    "@types/pg": "^7.4.11",
-    "ava": "1.1.0",
-    "bluebird": "^3.5.3",
-    "dockerode": "^2.5.7",
-    "execa": "^1.0.0",
-    "freeport": "^1.0.5",
-    "husky": "^1.2.0",
-    "lint-staged": "^8.1.0",
-    "nanographql": "^2.0.0",
-    "node-fetch": "^2.3.0",
-    "pg": "^7.6.1",
-    "postgraphile": "^4.0.1",
-    "postgraphile-core": "4.2.0",
-    "prettier-standard": "^9.1.1",
-    "typescript": "^3.1.6",
-    "semantic-release": "^15.12.1"
+    "@commitlint/cli": "8.3.5",
+    "@commitlint/config-conventional": "8.3.4",
+    "@types/bluebird": "3.5.29",
+    "@types/dockerode": "2.5.22",
+    "@types/nanographql": "2.0.1",
+    "@types/pg": "7.11.2",
+    "ava": "1.3.1",
+    "bluebird": "3.7.2",
+    "commitlint-circle": "1.0.0",
+    "dockerode": "3.1.0",
+    "execa": "4.0.0",
+    "freeport": "1.0.5",
+    "husky": "4.2.3",
+    "lint-staged": "10.0.7",
+    "nanographql": "2.0.0",
+    "node-fetch": "2.6.0",
+    "nyc": "^15.1.0",
+    "pg": "7.12.1",
+    "postgraphile": "4.4.4",
+    "postgraphile-core": "4.5.3",
+    "prettier": "2.0.5",
+    "semantic-release": "17.0.3",
+    "typescript": "3.9.3"
   },
   "scripts": {
     "build": "tsc",
-    "format": "prettier-standard '{src,test,scripts}/**/*.{js,jsx,ts,tsx}'",
-    "test": "npm run build run-tests",
-    "run-tests": "ava build/**/*.test.js",
-    "semantic-release": "semantic-release"
+    "pretest": "npm run build",
+    "test": "ava build/**/*.test.js",
+    "semantic-release": "semantic-release",
+    "format": "prettier '{src,test,scripts}/**/*.{ts,tsx}' --write",
+    "lint": "prettier '{src,test,scripts}/**/*.{ts,tsx}' --check"
   },
   "husky": {
     "hooks": {
@@ -47,12 +51,10 @@
     }
   },
   "lint-staged": {
-    "linters": {
-      "{src,test,scripts}/**/*.{js,jsx,ts,tsx}": [
-        "yarn format",
-        "git add"
-      ]
-    }
+    "{src,test,scripts}/**/*.{ts,tsx}": [
+      "yarn lint",
+      "yarn format"
+    ]
   },
   "ava": {
     "babel": false,
@@ -60,13 +62,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/jashmenn/postgraphile-upsert-plugin"
+    "url": "https://github.com/lukeramsden/postgraphile-upsert-plugin"
   },
   "publishConfig": {
     "access": "public"
   },
   "release": {
-    "repositoryUrl": "git@github.com:jashmenn/postgraphile-upsert-plugin.git"
+    "repositoryUrl": "git@github.com:lukeramsden/postgraphile-upsert-plugin.git"
   },
   "keywords": [
     "postgres",
